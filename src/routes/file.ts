@@ -7,7 +7,7 @@ import { multerConfig } from '../utils';
 export const fileRouter = Router();
 
 fileRouter.route('/images')
-  .post(auth, multer(multerConfig).single('images'), FileController.uploadMultiple)
+  .post(auth, multer(multerConfig).single('images'), FileController.uploadSingle)
 
 fileRouter.route('/images/:filename')
   .delete(auth, FileController.deleteOne);

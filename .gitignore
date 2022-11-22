@@ -4,3 +4,4 @@ yarn.lock
 dist
 
 /public/images/*
+!/public/images/here-to-exist
