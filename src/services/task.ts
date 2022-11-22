@@ -38,12 +38,10 @@ export default class TaskServices {
         },
       ]
 
-    const result: any = await paginate(
+    const result: any = await 
       TaskModel
         .find(filter)
-        .sort({ updatedAt: -1 }),
-      query
-    );
+        .sort({ updatedAt: -1 })
 
     const resultCount: number = await TaskModel.count();
 
