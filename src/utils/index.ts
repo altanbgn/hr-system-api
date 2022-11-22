@@ -4,10 +4,14 @@ import {
   createResponse,
   escapeRegExp
 } from './core';
+import {
+  multerConfig
+} from './multer'
 
 export {
   getEnv,
   paginate,
   createResponse,
-  escapeRegExp
+  escapeRegExp,
+  multerConfig
 }
