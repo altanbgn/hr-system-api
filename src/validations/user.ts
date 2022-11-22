@@ -23,6 +23,13 @@ const userSchema = {
   department: Joi
     .string(),
 
+  risks: Joi
+    .array()
+    .items({
+      risk: Joi.string(),
+      value: Joi.number().min(0).max(100)
+    }),
+
   email: Joi
     .string(),
 

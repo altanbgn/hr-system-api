@@ -1,9 +1,9 @@
-import { TaskModel, CommentModel } from '../models';
+import { CommentModel } from '../models';
 import {
   commentCreationValidators,
   commentUpdateValidators
 } from '../validations';
-import { paginate, escapeRegExp } from '../utils';
+import { paginate } from '../utils';
 
 export default class CommentServices {
   /**
@@ -21,26 +21,13 @@ export default class CommentServices {
    * @returns Found comments
    */
   public static async getAll(query: any) {
-    const { search, taskId } = query;
+    const { taskId } = query;
 
     let filter: any = {}
 
     if (!taskId) throw new Error('Task ID required!');
     
-    filter.taskId = taskId;
-
-    if (search)
-      filter['$or'] = [
-        {
-          firstname: { $in: [new RegExp(`.*${escapeRegExp(search)}.*`, 'i')] }
-        },
-        {
-          lastname: { $in: [new RegExp(`.*${escapeRegExp(search)}.*`, 'i')] }
-        },
-        {
-          username: { $in: [new RegExp(`.*${escapeRegExp(search)}.*`, 'i')] }
-        },
-      ]
+    filter.task = taskId;
 
     const result: any = await paginate(
       CommentModel

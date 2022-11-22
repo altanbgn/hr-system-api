@@ -34,6 +34,18 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Department',
   },
+  risks: [{
+    risk: {
+      type: Schema.Types.ObjectId,
+      ref: 'Risk',
+      unique: true,
+    },
+    value: {
+      type: Number,
+      minlength: 0,
+      maxlength: 100,
+    }
+  }],
   email: {
     type: String,
     minlength: 5,

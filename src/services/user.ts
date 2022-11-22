@@ -83,7 +83,10 @@ export default class UserServices {
    * @returns found user object
    */
   public static async getOne(id: string) {
-    return await UserModel.findById(id).populate('department').select('-password -__v');
+    return await UserModel
+      .findById(id)
+      .populate('department')
+      .select('-password -__v');
   }
 
   /**

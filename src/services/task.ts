@@ -3,7 +3,7 @@ import {
   taskCreationValidators,
   taskUpdateValidators
 } from '../validations';
-import { paginate, escapeRegExp } from '../utils';
+import { escapeRegExp } from '../utils';
 
 export default class TaskServices {
   /**
@@ -17,7 +17,7 @@ export default class TaskServices {
 
   /**
    * Get all tasks filtered by query object
-   * @param query 
+   * @param query
    * @returns Found tasks
    */
   public static async getAll(query: any) {
@@ -28,13 +28,7 @@ export default class TaskServices {
     if (search)
       filter['$or'] = [
         {
-          firstname: { $in: [new RegExp(`.*${escapeRegExp(search)}.*`, 'i')] }
-        },
-        {
-          lastname: { $in: [new RegExp(`.*${escapeRegExp(search)}.*`, 'i')] }
-        },
-        {
-          username: { $in: [new RegExp(`.*${escapeRegExp(search)}.*`, 'i')] }
+          name: { $in: [new RegExp(`.*${escapeRegExp(search)}.*`, 'i')] }
         },
       ]
 

@@ -7,6 +7,14 @@ import {
   IDepartmentDocument
 } from './department';
 import {
+  IReview,
+  IReviewDocument
+} from './review';
+import {
+  IRisk,
+  IRiskDocument
+} from './risk';
+import {
   ITask,
   ITaskDocument
 } from './task';
@@ -20,6 +28,10 @@ export {
   ICommentDocument,
   IDepartment,
   IDepartmentDocument,
+  IReview,
+  IReviewDocument,
+  IRisk,
+  IRiskDocument,
   ITask,
   ITaskDocument,
   IUser,

@@ -1,11 +1,11 @@
 import { Document } from 'mongoose';
 
-export interface IComment {
+export interface IReview {
   content: string;
-  task: string;
+  user: string;
 }
 
-export interface ICommentDocument extends IComment, Document {
+export interface IReviewDocument extends IReview, Document {
   _id: string;
   createdAt: Date;
   createdBy: string;

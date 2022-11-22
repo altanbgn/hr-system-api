@@ -1,26 +1,26 @@
 import {
-  DepartmentModel
+  RiskModel
 } from '../models';
 import {
-  departmentCreationValidators,
-  departmentUpdateValidators
+  riskCreationValidators,
+  riskUpdateValidators
 } from '../validations';
 import { paginate, escapeRegExp } from '../utils';
 
-export default class DepartmentServices {
+export default class RiskServices {
   /**
-   * Search and get department
+   * Search and get risk
    * @param id 
-   * @returns Found department object
+   * @returns Found risk object
    */
   public static async getOne(id: string) {
-    return await DepartmentModel.findById(id);
+    return await RiskModel.findById(id);
   }
 
   /**
-   * Get all departments filtered by query object
+   * Get all risks filtered by query object
    * @param query 
-   * @returns Found departments
+   * @returns Found risks
    */
   public static async getAll(query: any) {
     const { search } = query;
@@ -34,30 +34,32 @@ export default class DepartmentServices {
         },
       ]
 
-    const result: any = await 
-      DepartmentModel
+    const result: any = await paginate(
+      RiskModel
         .find(filter)
-        .sort({ updatedAt: -1 });
+        .sort({ updatedAt: -1 }),
+      query
+    );
 
-    const resultCount: number = await DepartmentModel.count();
+    const resultCount: number = await RiskModel.count();
 
     return {
-      departments: result,
+      risks: result,
       total: resultCount,
       size: result.length
     }
   }
 
   /**
-   * Create new department
+   * Create new risk
    * @param userId 
    * @param data 
-   * @returns Created department data in object
+   * @returns Created risk data in object
    */
   public static async create(userId: string, data: any) {
-    await departmentCreationValidators(data);
+    await riskCreationValidators(data);
 
-    return await DepartmentModel.create({
+    return await RiskModel.create({
       ...data,
       createdBy: userId,
       updatedBy: userId
@@ -65,16 +67,16 @@ export default class DepartmentServices {
   }
 
   /**
-   * Update department
+   * Update risk
    * @param id 
    * @param userId 
    * @param data 
    * @returns updated product data in object
    */
   public static async update(id: string, userId: string, data: any) {
-    await departmentUpdateValidators(data);
+    await riskUpdateValidators(data);
 
-    await DepartmentModel.findByIdAndUpdate(
+    await RiskModel.findByIdAndUpdate(
       id,
       { $set: {
         ...data,
@@ -82,15 +84,15 @@ export default class DepartmentServices {
       }}
     )
 
-    return await DepartmentModel.findById(id);
+    return await RiskModel.findById(id);
   }
 
   /**
-   * Delete department
+   * Delete risk
    * @param id
    * @returns whatever deleteOne returns
    */
   public static async delete(id: string) {
-    return await DepartmentModel.findByIdAndDelete(id);
+    return await RiskModel.findByIdAndDelete(id);
   }
 }

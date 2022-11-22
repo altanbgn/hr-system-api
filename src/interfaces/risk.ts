@@ -1,11 +1,11 @@
 import { Document } from 'mongoose';
 
-export interface IComment {
-  content: string;
-  task: string;
+export interface IRisk {
+  name: string;
+  key: string;
 }
 
-export interface ICommentDocument extends IComment, Document {
+export interface IRiskDocument extends IRisk, Document {
   _id: string;
   createdAt: Date;
   createdBy: string;
