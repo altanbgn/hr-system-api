@@ -38,7 +38,6 @@ const userSchema = new Schema({
     risk: {
       type: Schema.Types.ObjectId,
       ref: 'Risk',
-      unique: true,
     },
     value: {
       type: Number,
