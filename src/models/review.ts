@@ -9,7 +9,7 @@ const reviewSchema = new Schema({
     required: true,
   },
   risk: {
-    type: [Schema.Types.ObjectId],
+    type: Schema.Types.ObjectId,
     ref: 'Risk'
   },
 
