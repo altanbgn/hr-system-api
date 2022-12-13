@@ -2,7 +2,7 @@ import { Document } from 'mongoose';
 
 export interface IReview {
   content: string;
-  user: string;
+  risk: string;
 }
 
 export interface IReviewDocument extends IReview, Document {

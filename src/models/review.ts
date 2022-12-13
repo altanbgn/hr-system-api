@@ -8,10 +8,9 @@ const reviewSchema = new Schema({
     maxlength: 1024,
     required: true,
   },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
+  risk: {
+    type: [Schema.Types.ObjectId],
+    ref: 'Risk'
   },
 
   /**

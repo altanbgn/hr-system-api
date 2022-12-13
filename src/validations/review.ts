@@ -9,9 +9,9 @@ export async function reviewCreationValidators(data: any) {
         .max(1024)
         .required(),
       
-      user: Joi
-        .string()
-        .required(),
+      risk: Joi
+        .array()
+        .items(Joi.string())
     })
 
     return await schema.validateAsync(data);
@@ -27,6 +27,10 @@ export async function reviewUpdateValidators(data: any) {
         .string()
         .min(3)
         .max(1024),
+
+      risk: Joi
+        .array()
+        .items(Joi.string())
     })
 
     return await schema.validateAsync(data);

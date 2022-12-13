@@ -14,33 +14,30 @@ const userSchema = {
   username: Joi
     .string(),
 
+  email: Joi
+    .string(),
+
   status: Joi
     .string(),
 
   position: Joi
     .string(),
 
+  birthday: Joi
+    .date(),
+  
+  dateJoined: Joi
+    .date(),
+  
+  phone: Joi
+    .number(),
+
   department: Joi
     .string(),
 
-  risks: Joi
+  reviews: Joi
     .array()
-    .items({
-      risk: Joi.string(),
-      value: Joi.number().min(0).max(100)
-    }),
-
-  email: Joi
-    .string(),
-
-  birthday: Joi
-    .date(),
-
-  dateJoined: Joi
-    .date(),
-
-  phone: Joi
-    .number(),
+    .items(Joi.string()),
 };
 
 export async function userUpdateValidators(data: any) {

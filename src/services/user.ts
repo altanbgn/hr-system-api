@@ -18,6 +18,7 @@ export default class UserServices {
       .findById(tokenData.user._id)
       .select('-password -__v')
       .populate('department')
+      .populate('reviews')
 
     if (!result)
       throw new Error('User does not exist!');
@@ -86,6 +87,7 @@ export default class UserServices {
     return await UserModel
       .findById(id)
       .populate('department')
+      .populate('reviews')
       .select('-password -__v');
   }
 
@@ -117,6 +119,7 @@ export default class UserServices {
         .find(filter)
         .sort({ updatedAt: -1 })
         .populate('department')
+        .populate('reviews')
         .select('-password -__v'),
       query
     );

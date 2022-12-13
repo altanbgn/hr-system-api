@@ -3,7 +3,7 @@ import {
   reviewCreationValidators,
   reviewUpdateValidators
 } from '../validations';
-import { paginate } from '../utils';
+import { paginate, escapeRegExp } from '../utils';
 
 export default class ReviewServices {
   /**
@@ -12,7 +12,7 @@ export default class ReviewServices {
    * @returns Found review object
    */
   public static async getOne(id: string) {
-    return await ReviewModel.findById(id).populate('task');
+    return await ReviewModel.findById(id).populate('risk');
   }
 
   /**
@@ -21,17 +21,20 @@ export default class ReviewServices {
    * @returns Found reviews
    */
   public static async getAll(query: any) {
-    const { userId } = query;
+    const { search } = query;
 
     let filter: any = {}
 
-    if (!userId) throw new Error('User ID required!');
-    
-    filter.user = userId;
+    if (search)
+      filter['$or'] = [
+        {
+          content: { $in: [new RegExp(`.*${escapeRegExp(search)}.*`, 'i')] }
+        },
+      ]
 
     const result: any = await paginate(
       ReviewModel
-        .find(filter)
+        .find()
         .sort({ updatedAt: -1 }),
       query
     );

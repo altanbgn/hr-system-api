@@ -22,6 +22,13 @@ const userSchema = new Schema({
     unique: true,
     required: true,
   },
+  email: {
+    type: String,
+    minlength: 5,
+    maxlength: 255,
+    required: true,
+    unique: true,
+  },
   status: {
     type: String,
     enum: USER_STATUS.ALL,
@@ -29,28 +36,6 @@ const userSchema = new Schema({
     lowercase: true,
     required: true,
     trim: true,
-  },
-  department: {
-    type: Schema.Types.ObjectId,
-    ref: 'Department',
-  },
-  risks: [{
-    risk: {
-      type: Schema.Types.ObjectId,
-      ref: 'Risk',
-    },
-    value: {
-      type: Number,
-      minlength: 0,
-      maxlength: 100,
-    }
-  }],
-  email: {
-    type: String,
-    minlength: 5,
-    maxlength: 255,
-    required: true,
-    unique: true,
   },
   position: {
     type: String,
@@ -63,6 +48,15 @@ const userSchema = new Schema({
   },
   phone: {
     type: Number,
+  },
+  department: {
+    type: Schema.Types.ObjectId,
+    ref: 'Department',
+  },
+  reviews: {
+    type: [Schema.Types.ObjectId],
+    ref: 'Review',
+    default: []
   },
   password: {
     type: String,
